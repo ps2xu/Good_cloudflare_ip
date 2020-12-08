@@ -8484,5 +8484,5 @@ cls
 choice /t 3 /d y /n >nul
 RD /S /Q temp
 ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%.txt
-for /f %%i in ('dir /o:-s /b 速度排名%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
+for /f %%i in ('dir /o:n /b 速度排名%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
 start %file_name%
