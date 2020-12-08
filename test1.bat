@@ -8437,17 +8437,12 @@ echo 198.41.222.%ip% >> ip.txt
 set /a ip=%random%%%255
 title 正在生成 198.41.223.%ip%
 echo 198.41.223.%ip% >> ip.txt
-pause
 cls
 title 测试丢包率
-pause
 fping.exe -f ip.txt -c %num% --interval=%interval% -s > ping.csv
-pause
 findstr "%%" ping.csv > temp.csv
 del ping.csv
-pause
 del ip.txt
-pause
 sort /r /+20 temp.csv /o ping.csv
 del temp.csv
 del sort.txt
@@ -8488,5 +8483,6 @@ cd ..
 cls
 choice /t 3 /d y /n >nul
 RD /S /Q temp
-start 速度排名.txt
 ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%.txt
+for /f %%i in ('dir /o:-s /b 速度排名%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
+start %file_name%
