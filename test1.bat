@@ -8489,3 +8489,4 @@ cls
 choice /t 3 /d y /n >nul
 RD /S /Q temp
 start 速度排名.txt
+ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%.txt
