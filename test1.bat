@@ -8483,6 +8483,33 @@ cd ..
 cls
 choice /t 3 /d y /n >nul
 RD /S /Q temp
-ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%.txt
+
+REM 获取原日期格式
+for /f "tokens=3 delims= " %%i in ('reg query "HKCU\Control Panel\International" /V sShortDate') do set date_format=%%i 
+
+REM 更改注册表日期格式为年/月/日
+reg add "HKCU\Control Panel\International" /V sShortDate /T REG_SZ /D "yyyy/MM/dd" /F 
+
+REM 为例注册表即时生效，关闭桌面程序等1秒后再开启桌面程序
+REM taskkill /im explorer.exe /f    
+REM echo WScript.sleep 1000 > sleep.vbs
+REM sleep.vbs
+REM start c:\windows\explorer.exe
+REM del sleep.vbs
+
+REM 如10以下的时，自动补足“0”
+set t=%Time% 
+if "%time:~0,1%" ==" " (
+set t=0%time:~1%
+)
+
+
+ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%t:~0,2%%t:~3,2%.txt
+
+REM CMD命令回显结果存入file_name
 for /f %%i in ('dir /o:n /b 速度排名%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
+
+REM 改回注册表原日期格式
+reg add "HKCU\Control Panel\International" /V sShortDate /T REG_SZ /D %date_format% /F
+
 start %file_name%
