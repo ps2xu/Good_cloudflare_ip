@@ -8504,10 +8504,10 @@ set t=0%time:~1%
 )
 
 
-ren 速度排名.txt 速度排名%date:~0,4%%date:~5,2%%date:~8,2%%t:~0,2%%t:~3,2%.txt
+ren 速度排名.txt Speed_Result_%date:~0,4%%date:~5,2%%date:~8,2%%t:~0,2%%t:~3,2%.txt
 
 REM CMD命令回显结果存入file_name
-for /f %%i in ('dir /o:n /b 速度排名%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
+for /f %%i in ('dir /o:n /b Speed_Result_%date:~0,4%%date:~5,2%%date:~8,2%*.txt') do set file_name=%%i
 
 REM 改回注册表原日期格式
 reg add "HKCU\Control Panel\International" /V sShortDate /T REG_SZ /D %date_format% /F
